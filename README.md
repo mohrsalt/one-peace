@@ -1,332 +1,238 @@
-<!---
-Copyright 2023 The OFA-Sys Team. 
-All rights reserved.
-This source code is licensed under the Apache 2.0 license found in the LICENSE file in the root directory.
--->
-
-
 <p align="center">
-    <br>
-    <img src="assets/logo.png" width="350" />
-    <br>
-<p>
-<p align="center">
-        📖 <a href="https://arxiv.org/abs/2305.11172">Paper</a>&nbsp&nbsp ｜ &nbsp🤗 <a href="https://huggingface.co/spaces/OFA-Sys/ONE-PEACE_Multimodal_Retrieval">Demo</a>&nbsp&nbsp | &nbsp&nbsp🤖 <a href="https://modelscope.cn/models/damo/ONE-PEACE-4B/summary">ModelScope</a>&nbsp&nbsp | &nbsp&nbsp<a href="checkpoints.md">Checkpoints</a>&nbsp ｜ &nbsp<a href="datasets.md">Datasets</a>
-</p>
-<br>
-
-ONE-PEACE is a general representation model across vision, audio, and language modalities,
-Without using any vision or language pretrained model for initialization, ONE-PEACE achieves leading results in vision, 
-audio, audio-language, and vision-language tasks.
-Furthermore, ONE-PEACE possesses a strong emergent zero-shot retrieval capability, enabling it to align modalities
-that are not paired in the training data.
-
-Below shows the architecture and pretraining tasks of ONE-PEACE.
-With the scaling-friendly architecture and modality-agnostic tasks, ONE-PEACE has the potential to expand to unlimited modalities.
-
-<p align="center">
-<img src="assets/one_peace.png" width=100%>
+  <img src="docs/fairseq_logo.png" width="150">
+  <br />
+  <br />
+  <a href="https://opensource.fb.com/support-ukraine"><img alt="Support Ukraine" src="https://img.shields.io/badge/Support-Ukraine-FFD500?style=flat&labelColor=005BBB" /></a>
+  <a href="https://github.com/pytorch/fairseq/blob/main/LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-blue.svg" /></a>
+  <a href="https://github.com/pytorch/fairseq/releases"><img alt="Latest Release" src="https://img.shields.io/github/release/pytorch/fairseq.svg" /></a>
+  <a href="https://github.com/pytorch/fairseq/actions?query=workflow:build"><img alt="Build Status" src="https://github.com/pytorch/fairseq/workflows/build/badge.svg" /></a>
+  <a href="https://fairseq.readthedocs.io/en/latest/?badge=latest"><img alt="Documentation Status" src="https://readthedocs.org/projects/fairseq/badge/?version=latest" /></a>
 </p>
 
-<br>
+--------------------------------------------------------------------------------
 
-# Online Demo
-We provide the [online demo](https://huggingface.co/spaces/OFA-Sys/ONE-PEACE_Multimodal_Retrieval) in Huggingface Spaces. In this demo, you can combine multiple modalities to retrieve related images, such as audio-to-image, audio+text-to-image, audio+image-to-image, and even audio+image+text-to-image.
+Fairseq(-py) is a sequence modeling toolkit that allows researchers and
+developers to train custom models for translation, summarization, language
+modeling and other text generation tasks.
 
-<p align="center">
-<img src="assets/demo.png" width=100%>
-</p>
-<br>
+We provide reference implementations of various sequence modeling papers:
 
-# News
-* **2023.7.20:** Released the [visual grounding API](https://github.com/OFA-Sys/ONE-PEACE#visual-grounding), you can use it to locate objects from the picture.
-* **2023.6.23:** Released vision tasks fine-tuning scripts and checkpoints. See [guidance for vision tasks](one_peace_vision/README.md) for more details.
-* **2023.6.04:** Released the pretraining scripts. See [guidance for pretraining](one_peace/README.md/##Pretraining) for more details.
-* **2023.5.30:** Released the finetuned checkpoints and scripts for audio(-language) tasks.
-* **2023.5.29:** Released the finetuned checkpoints for vision-language tasks.
-* **2023.5.27:** 🔥 We have provided the [multimodal retrieval demo](https://huggingface.co/spaces/OFA-Sys/ONE-PEACE_Multimodal_Retrieval) in huggingface spaces. Have Fun!
-* **2023.5.25:** Released the [multimodal embedding API](https://github.com/OFA-Sys/ONE-PEACE#multi-modal-embedding), which enables the quick extraction for image, audio and text representations.
-* **2023.5.23:** Released the [pretrained checkpoint](checkpoints.md), as well as [finetuning & inference scripts](one_peace/README.md) for vision-language tasks.
-* **2023.5.19:** Released the paper and code. Pretrained & finetuned checkpoints, training & inference scripts, as well as demos will be released as soon as possible.
-<br></br>
+<details><summary>List of implemented papers</summary><p>
 
-# Models and Results
-## Model Card
-We list the parameters and pretrained checkpoints of ONE-PEACE below. Note that ONE-PEACE can be disassembled into different branches to handle different tasks.
-We also provide the vision-branch of ONE-PEACE, which can be used to perform vision tasks.
+* **Convolutional Neural Networks (CNN)**
+  + [Language Modeling with Gated Convolutional Networks (Dauphin et al., 2017)](examples/language_model/conv_lm/README.md)
+  + [Convolutional Sequence to Sequence Learning (Gehring et al., 2017)](examples/conv_seq2seq/README.md)
+  + [Classical Structured Prediction Losses for Sequence to Sequence Learning (Edunov et al., 2018)](https://github.com/pytorch/fairseq/tree/classic_seqlevel)
+  + [Hierarchical Neural Story Generation (Fan et al., 2018)](examples/stories/README.md)
+  + [wav2vec: Unsupervised Pre-training for Speech Recognition (Schneider et al., 2019)](examples/wav2vec/README.md)
+* **LightConv and DynamicConv models**
+  + [Pay Less Attention with Lightweight and Dynamic Convolutions (Wu et al., 2019)](examples/pay_less_attention_paper/README.md)
+* **Long Short-Term Memory (LSTM) networks**
+  + Effective Approaches to Attention-based Neural Machine Translation (Luong et al., 2015)
+* **Transformer (self-attention) networks**
+  + Attention Is All You Need (Vaswani et al., 2017)
+  + [Scaling Neural Machine Translation (Ott et al., 2018)](examples/scaling_nmt/README.md)
+  + [Understanding Back-Translation at Scale (Edunov et al., 2018)](examples/backtranslation/README.md)
+  + [Adaptive Input Representations for Neural Language Modeling (Baevski and Auli, 2018)](examples/language_model/README.adaptive_inputs.md)
+  + [Lexically constrained decoding with dynamic beam allocation (Post & Vilar, 2018)](examples/constrained_decoding/README.md)
+  + [Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context (Dai et al., 2019)](examples/truncated_bptt/README.md)
+  + [Adaptive Attention Span in Transformers (Sukhbaatar et al., 2019)](examples/adaptive_span/README.md)
+  + [Mixture Models for Diverse Machine Translation: Tricks of the Trade (Shen et al., 2019)](examples/translation_moe/README.md)
+  + [RoBERTa: A Robustly Optimized BERT Pretraining Approach (Liu et al., 2019)](examples/roberta/README.md)
+  + [Facebook FAIR's WMT19 News Translation Task Submission (Ng et al., 2019)](examples/wmt19/README.md)
+  + [Jointly Learning to Align and Translate with Transformer Models (Garg et al., 2019)](examples/joint_alignment_translation/README.md )
+  + [Multilingual Denoising Pre-training for Neural Machine Translation (Liu et at., 2020)](examples/mbart/README.md)
+  + [Neural Machine Translation with Byte-Level Subwords (Wang et al., 2020)](examples/byte_level_bpe/README.md)
+  + [Unsupervised Quality Estimation for Neural Machine Translation (Fomicheva et al., 2020)](examples/unsupervised_quality_estimation/README.md)
+  + [wav2vec 2.0: A Framework for Self-Supervised Learning of Speech Representations (Baevski et al., 2020)](examples/wav2vec/README.md)
+  + [Generating Medical Reports from Patient-Doctor Conversations Using Sequence-to-Sequence Models (Enarvi et al., 2020)](examples/pointer_generator/README.md)
+  + [Linformer: Self-Attention with Linear Complexity (Wang et al., 2020)](examples/linformer/README.md)
+  + [Cross-lingual Retrieval for Iterative Self-Supervised Training (Tran et al., 2020)](examples/criss/README.md)
+  + [Deep Transformers with Latent Depth (Li et al., 2020)](examples/latent_depth/README.md)
+  + [Unsupervised Cross-lingual Representation Learning for Speech Recognition (Conneau et al., 2020)](https://arxiv.org/abs/2006.13979)
+  + [Self-training and Pre-training are Complementary for Speech Recognition (Xu et al., 2020)](https://arxiv.org/abs/2010.11430)
+  + [Robust wav2vec 2.0: Analyzing Domain Shift in Self-Supervised Pre-Training (Hsu, et al., 2021)](https://arxiv.org/abs/2104.01027)
+  + [Unsupervised Speech Recognition (Baevski, et al., 2021)](https://arxiv.org/abs/2105.11084)
+  + [Simple and Effective Zero-shot Cross-lingual Phoneme Recognition (Xu et al., 2021)](https://arxiv.org/abs/2109.11680)
+  + [VideoCLIP: Contrastive Pre-training for Zero-shot Video-Text Understanding (Xu et. al., 2021)](https://arxiv.org/pdf/2109.14084.pdf)
+  + [VLM: Task-agnostic Video-Language Model Pre-training for Video Understanding (Xu et. al., 2021)](https://aclanthology.org/2021.findings-acl.370.pdf)
+  + [NormFormer: Improved Transformer Pretraining with Extra Normalization (Shleifer et. al, 2021)](examples/normformer/README.md)
+* **Non-autoregressive Transformers**
+  + Non-Autoregressive Neural Machine Translation (Gu et al., 2017)
+  + Deterministic Non-Autoregressive Neural Sequence Modeling by Iterative Refinement (Lee et al. 2018)
+  + Insertion Transformer: Flexible Sequence Generation via Insertion Operations (Stern et al. 2019)
+  + Mask-Predict: Parallel Decoding of Conditional Masked Language Models (Ghazvininejad et al., 2019)
+  + [Levenshtein Transformer (Gu et al., 2019)](examples/nonautoregressive_translation/README.md)
+* **Finetuning**
+  + [Better Fine-Tuning by Reducing Representational Collapse (Aghajanyan et al. 2020)](examples/rxf/README.md)
 
-<table border="1" width="100%">
-    <tr align="center">
-        <th>Model</th><th>Ckpt</th><th>Params</th><th>Hidden size</th><th>Intermediate size</th><th>Attention heads</th><th>Layers</th>
-    </tr>
-    <tr align="center">
-        <td>ONE-PEACE</td><td><a href="http://one-peace-shanghai.oss-accelerate.aliyuncs.com/one-peace.pt">Download</a></td><td>4B</td><td>1536</td><td>6144</td><td>24</td><td>40</td>
-    </tr>
-    <tr align="center">
-        <td>ONE-PEACE<br>(Vision Branch)</td><td><a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/one-peace-vision.pkl">Download</a></td><td>1.5B</td><td>1536</td><td>6144</td><td>24</td><td>40</td>
-    </tr>
-</table>
-<br>
+</p></details>
 
-## Results
-### Vision Tasks
-<table border="1" width="100%">
-    <tr align="center">
-        <th>Task</th><th>Image classification</th><th>Semantic Segmentation</th><th>Object Detection (w/o Object365)</th><th>Video Action Recognition</th>
-    </tr>
-    <tr align="center">
-        <td>Dataset</td><td>Imagenet-1K</td><td>ADE20K</td><td>COCO</td><td>Kinetics 400</td>
-    </tr>
-    <tr align="center">
-        <td>Split</td><td>val</td><td>val</td><td>val</td><td>val</td>
-    </tr>
-    <tr align="center">
-        <td>Metric</td><td>Acc.</td><td>mIoU<sup>ss</sup> / mIoU<sup>ms</sup></td><td>AP<sup>box</sup> / AP<sup>mask</sup></td><td>Top-1 Acc. / Top-5 Acc.</td>
-    </tr>
-    <tr align="center">
-        <td>ONE-PEACE</td><td>89.8</td><td>62.0 / 63.0</td><td>60.4 / 52.9</td><td>88.1 / 97.8</td>
-    </tr>
-</table>
+### What's New:
+* December 2021 [Released Direct speech-to-speech translation code](examples/speech_to_speech/README.md)
+* October 2021 [Released VideoCLIP and VLM models](examples/MMPT/README.md)
+* October 2021 [Released multilingual finetuned XLSR-53 model](examples/wav2vec/README.md)
+* September 2021 [`master` branch renamed to `main`](https://github.com/github/renaming).
+* July 2021 [Released DrNMT code](examples/discriminative_reranking_nmt/README.md)
+* July 2021 [Released Robust wav2vec 2.0 model](examples/wav2vec/README.md)
+* June 2021 [Released XLMR-XL and XLMR-XXL models](examples/xlmr/README.md)
+* May 2021 [Released Unsupervised Speech Recognition code](examples/wav2vec/unsupervised/README.md)
+* March 2021 [Added full parameter and optimizer state sharding + CPU offloading](examples/fully_sharded_data_parallel/README.md)
+* February 2021 [Added LASER training code](examples/laser/README.md)
+* December 2020: [Added Adaptive Attention Span code](examples/adaptive_span/README.md)
+* December 2020: [GottBERT model and code released](examples/gottbert/README.md)
+* November 2020: Adopted the [Hydra](https://github.com/facebookresearch/hydra) configuration framework
+  * [see documentation explaining how to use it for new and existing projects](docs/hydra_integration.md)
+* November 2020: [fairseq 0.10.0 released](https://github.com/pytorch/fairseq/releases/tag/v0.10.0)
+* October 2020: [Added R3F/R4F (Better Fine-Tuning) code](examples/rxf/README.md)
+* October 2020: [Deep Transformer with Latent Depth code released](examples/latent_depth/README.md)
+* October 2020: [Added CRISS models and code](examples/criss/README.md)
 
-### Audio Tasks
-<table border="1" width="100%">
-    <tr align="center">
-        <th>Task</th><th colspan="4">Audio-Text Retrieval</th><th colspan="3">Audio Classification</th><th>Audio Question Answering</th>
-    </tr>
-    <tr align="center">
-        <td>Dataset</td><td colspan="2">AudioCaps</td><td colspan="2">Clotho</td><td>ESC-50</td><td>FSD50K</td><td>VGGSound (Audio-Visual)</td><td>AVQA</td>
-    </tr>
-    <tr align="center">
-        <td>Split</td><td colspan="2">test</td><td colspan="2">evaluation</td><td>full</td><td>eval</td><td>test</td><td>val</td>
-    </tr>
-    <tr align="center">
-        <td>Metric</td><td>T2A R@1</td><td>A2T R@1</td><td>T2A R@1</td><td>A2T R@1</td><td>Zero-shot Acc.</td><td>MAP</td><td>Acc.</td><td>Acc.</td>
-    </tr>
-    <tr align="center">
-        <td>ONE-PEACE</td><td>42.5</td><td>51.0</td><td>22.4</td><td>27.1</td><td>91.8</td><td>69.7</td><td>68.2</td><td>92.2</td>
-    </tr>
-</table>
+<details><summary>Previous updates</summary><p>
 
-### Vision-Language Tasks
-<table border="1" width="100%">
-    <tr align="center">
-        <th>Task</th><th colspan="4">Image-Text Retrieval (w/o ranking)</th><th colspan="3">Visual Grounding</th><th>VQA</th><th>Visual Reasoning</th>
-    </tr>
-    <tr align="center">
-        <td>Dataset</td><td colspan="2">COCO</td><td colspan="2">Flickr30K</td><td>RefCOCO</td><td>RefCOCO+</td><td>RefCOCOg</td><td>VQAv2</td><td>NLVR2</td>
-    </tr>
-    <tr align="center">
-        <td>Split</td><td colspan="2">test</td><td colspan="2">test</td><td>val / testA / testB</td><td>val / testA / testB</td><td>val-u / test-u</td><td>test-dev / test-std</td><td>dev / test-P</td>
-    </tr>
-    <tr align="center">
-        <td>Metric</td><td>I2T R@1</td><td>T2I R@1</td><td>I2T R@1</td><td>T2I R@1</td><td colspan="3">Acc@0.5</td><td>Acc.</td><td>Acc.</td>
-    </tr>
-    <tr align="center">
-        <td>ONE-PEACE</td><td>84.1</td><td>65.4</td><td>97.6</td><td>89.6</td><td>92.58 / 94.18 / 89.26</td><td>88.77 / 92.21 / 83.23</td><td>89.22 / 89.27</td><td>82.6 / 82.5</td><td>87.8 / 88.3</td>
-    </tr>
-</table>
-<br></br>
+* September 2020: [Added Linformer code](examples/linformer/README.md)
+* September 2020: [Added pointer-generator networks](examples/pointer_generator/README.md)
+* August 2020: [Added lexically constrained decoding](examples/constrained_decoding/README.md)
+* August 2020: [wav2vec2 models and code released](examples/wav2vec/README.md)
+* July 2020: [Unsupervised Quality Estimation code released](examples/unsupervised_quality_estimation/README.md)
+* May 2020: [Follow fairseq on Twitter](https://twitter.com/fairseq)
+* April 2020: [Monotonic Multihead Attention code released](examples/simultaneous_translation/README.md)
+* April 2020: [Quant-Noise code released](examples/quant_noise/README.md)
+* April 2020: [Initial model parallel support and 11B parameters unidirectional LM released](examples/megatron_11b/README.md)
+* March 2020: [Byte-level BPE code released](examples/byte_level_bpe/README.md)
+* February 2020: [mBART model and code released](examples/mbart/README.md)
+* February 2020: [Added tutorial for back-translation](https://github.com/pytorch/fairseq/tree/main/examples/backtranslation#training-your-own-model-wmt18-english-german)
+* December 2019: [fairseq 0.9.0 released](https://github.com/pytorch/fairseq/releases/tag/v0.9.0)
+* November 2019: [VizSeq released (a visual analysis toolkit for evaluating fairseq models)](https://facebookresearch.github.io/vizseq/docs/getting_started/fairseq_example)
+* November 2019: [CamemBERT model and code released](examples/camembert/README.md)
+* November 2019: [BART model and code released](examples/bart/README.md)
+* November 2019: [XLM-R models and code released](examples/xlmr/README.md)
+* September 2019: [Nonautoregressive translation code released](examples/nonautoregressive_translation/README.md)
+* August 2019: [WMT'19 models released](examples/wmt19/README.md)
+* July 2019: fairseq relicensed under MIT license
+* July 2019: [RoBERTa models and code released](examples/roberta/README.md)
+* June 2019: [wav2vec models and code released](examples/wav2vec/README.md)
 
+</p></details>
+
+### Features:
+
+* multi-GPU training on one machine or across multiple machines (data and model parallel)
+* fast generation on both CPU and GPU with multiple search algorithms implemented:
+  + beam search
+  + Diverse Beam Search ([Vijayakumar et al., 2016](https://arxiv.org/abs/1610.02424))
+  + sampling (unconstrained, top-k and top-p/nucleus)
+  + [lexically constrained decoding](examples/constrained_decoding/README.md) (Post & Vilar, 2018)
+* [gradient accumulation](https://fairseq.readthedocs.io/en/latest/getting_started.html#large-mini-batch-training-with-delayed-updates) enables training with large mini-batches even on a single GPU
+* [mixed precision training](https://fairseq.readthedocs.io/en/latest/getting_started.html#training-with-half-precision-floating-point-fp16) (trains faster with less GPU memory on [NVIDIA tensor cores](https://developer.nvidia.com/tensor-cores))
+* [extensible](https://fairseq.readthedocs.io/en/latest/overview.html): easily register new models, criterions, tasks, optimizers and learning rate schedulers
+* [flexible configuration](docs/hydra_integration.md) based on [Hydra](https://github.com/facebookresearch/hydra) allowing a combination of code, command-line and file based configuration
+* [full parameter and optimizer state sharding](examples/fully_sharded_data_parallel/README.md)
+* [offloading parameters to CPU](examples/fully_sharded_data_parallel/README.md)
+
+We also provide [pre-trained models for translation and language modeling](#pre-trained-models-and-examples)
+with a convenient `torch.hub` interface:
+
+``` python
+en2de = torch.hub.load('pytorch/fairseq', 'transformer.wmt19.en-de.single_model')
+en2de.translate('Hello world', beam=5)
+# 'Hallo Welt'
+```
+
+See the PyTorch Hub tutorials for [translation](https://pytorch.org/hub/pytorch_fairseq_translation/)
+and [RoBERTa](https://pytorch.org/hub/pytorch_fairseq_roberta/) for more examples.
 
 # Requirements and Installation
-* 3.6 <= Python <=3.10
-* Pytorch >= 1.10.0 (recommend 1.13.1)
-* CUDA Version >= 10.2 (recommend 11.6)
-* Install required packages:
-```bash
-git clone https://github.com/OFA-Sys/ONE-PEACE
-cd ONE-PEACE
-pip install -r requirements.txt
+
+* [PyTorch](http://pytorch.org/) version >= 1.5.0
+* Python version >= 3.6
+* For training new models, you'll also need an NVIDIA GPU and [NCCL](https://github.com/NVIDIA/nccl)
+* **To install fairseq** and develop locally:
+
+``` bash
+git clone https://github.com/pytorch/fairseq
+cd fairseq
+pip install --editable ./
+
+# on MacOS:
+# CFLAGS="-stdlib=libc++" pip install --editable ./
+
+# to install the latest stable release (0.10.x)
+# pip install fairseq
 ```
-* For faster training install [Apex](https://github.com/NVIDIA/apex) library (optional):
-```bash
+
+* **For faster training** install NVIDIA's [apex](https://github.com/NVIDIA/apex) library:
+
+``` bash
 git clone https://github.com/NVIDIA/apex
-cd apex && pip install -v --disable-pip-version-check --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" --global-option="--distributed_adam" --global-option="--deprecated_fused_adam" ./
-```
-* Install [Xformers](https://github.com/facebookresearch/xformers) library to use Memory-efficient attention (optional):
-```bash
-conda install xformers -c xformers
-```
-* Install [FlashAttention](https://github.com/HazyResearch/flash-attention) library to use faster LayerNorm (optional):
-```bash
-git clone --recursive https://github.com/HazyResearch/flash-attention
-cd flash-attention && pip install .
-cd csrc/layer_norm && pip install .
-```
-<br>
-
-# Datasets and Checkpoints
-See [datasets.md](datasets.md) and [checkpoints.md](checkpoints.md).
-<br></br>
-
-# Usage
-## API
-We provide a simple code snippet to show how to use the API for ONE-PEACE.
-
-### Multi-modal Embedding
-We use ONE-PEACE to compute embeddings for text, images, and audio, as well as their similarities:
-```python
-import torch
-from one_peace.models import from_pretrained
-
-device = "cuda" if torch.cuda.is_available() else "cpu"
-# "ONE-PEACE" can also be replaced with ckpt path
-model = from_pretrained("ONE-PEACE", device=device, dtype="float32")
-
-# process raw data
-src_tokens = model.process_text(["cow", "dog", "elephant"])
-src_images = model.process_image(["assets/dog.JPEG", "assets/elephant.JPEG"])
-src_audios, audio_padding_masks = model.process_audio(["assets/cow.flac", "assets/dog.flac"])
-
-with torch.no_grad():
-    # extract normalized features
-    text_features = model.extract_text_features(src_tokens)
-    image_features = model.extract_image_features(src_images)
-    audio_features = model.extract_audio_features(src_audios, audio_padding_masks)
-
-    # compute similarity
-    i2t_similarity = image_features @ text_features.T
-    a2t_similarity = audio_features @ text_features.T
-
-print("Image-to-text similarities:", i2t_similarity)
-print("Audio-to-text similarities:", a2t_similarity)
+cd apex
+pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" \
+  --global-option="--deprecated_fused_adam" --global-option="--xentropy" \
+  --global-option="--fast_multihead_attn" ./
 ```
 
-### Visual Grounding
-We use ONE-PEACE to perform visual grounding on anime pictures:
-```python
-import torch
-import cv2
-from one_peace.models import from_pretrained
+* **For large datasets** install [PyArrow](https://arrow.apache.org/docs/python/install.html#using-pip): `pip install pyarrow`
+* If you use Docker make sure to increase the shared memory size either with `--ipc=host` or `--shm-size`
+ as command line options to `nvidia-docker run` .
 
-device = "cuda" if torch.cuda.is_available() else "cpu"
-model = from_pretrained(
-	"ONE-PEACE_Grounding",
-    model_type="one_peace_classify",
-    device=device,
-    dtype="float32"
-)
+# Getting Started
 
-# process raw data
-image_text_list = [
-    ("assets/pokemons.jpg", "a blue turtle-like pokemon with round head"),
-    ("assets/pokemons.jpg", "Bulbasaur"),
-    ("assets/pokemons.jpg", "Charmander"),
-    ("assets/pokemons.jpg", "Squirtle"),
-    ("assets/one_piece.jpeg", "Brook"),
-    ("assets/one_piece.jpeg", "Franky"),
-    ("assets/one_piece.jpeg", "Monkey D. Luffy"),
-    ("assets/one_piece.jpeg", "Nami"),
-    ("assets/one_piece.jpeg", "Nico Robin"),
-    ("assets/one_piece.jpeg", "Roronoa Zoro"),
-    ("assets/one_piece.jpeg", "Tony Tony Chopper"),
-    ("assets/one_piece.jpeg", "Usopp"),
-    ("assets/one_piece.jpeg", "Vinsmoke Sanji"),
-]
-(src_images, image_widths, image_heights), src_tokens  = model.process_image_text_pairs(
-    image_text_list, return_image_sizes=True
-)
+The [full documentation](https://fairseq.readthedocs.io/) contains instructions
+for getting started, training new models and extending fairseq with new model
+types and tasks.
 
-with torch.no_grad():
-    # extract features
-    vl_features = model.extract_vl_features(src_images, src_tokens).sigmoid()
-    # extract coords
-    vl_features[:, ::2] *= image_widths.unsqueeze(1)
-    vl_features[:, 1::2] *= image_heights.unsqueeze(1)
-    coords = vl_features.cpu().tolist()
+# Pre-trained models and examples
 
-# display results
-for i, image_text_pair in enumerate(image_text_list):
-    image, text = image_text_pair
-    img = cv2.imread(image)
-    cv2.rectangle(
-        img,
-        (int(coords[i][0]), int(coords[i][1])),
-        (int(coords[i][2]), int(coords[i][3])),
-        (0, 255, 0),
-        3
-    )
-    cv2.imshow(text, img)
-    cv2.waitKey(3500)
-    cv2.destroyAllWindows()
+We provide pre-trained models and pre-processed, binarized test sets for several tasks listed below,
+as well as example training and evaluation commands.
 
-```
+* [Translation](examples/translation/README.md): convolutional and transformer models are available
+* [Language Modeling](examples/language_model/README.md): convolutional and transformer models are available
 
-### Audio Classification
-We use ONE-PEACE to perform audio classification:
+We also have more detailed READMEs to reproduce results from specific papers:
 
-```python
-import torch
-import json
-from one_peace.models import from_pretrained
+* [XLS-R: Self-supervised Cross-lingual Speech Representation Learning at Scale (Babu et al., 2021)](examples/wav2vec/xlsr/README.md)
+* [Cross-lingual Retrieval for Iterative Self-Supervised Training (Tran et al., 2020)](examples/criss/README.md)
+* [wav2vec 2.0: A Framework for Self-Supervised Learning of Speech Representations (Baevski et al., 2020)](examples/wav2vec/README.md)
+* [Unsupervised Quality Estimation for Neural Machine Translation (Fomicheva et al., 2020)](examples/unsupervised_quality_estimation/README.md)
+* [Training with Quantization Noise for Extreme Model Compression ({Fan*, Stock*} et al., 2020)](examples/quant_noise/README.md)
+* [Neural Machine Translation with Byte-Level Subwords (Wang et al., 2020)](examples/byte_level_bpe/README.md)
+* [Multilingual Denoising Pre-training for Neural Machine Translation (Liu et at., 2020)](examples/mbart/README.md)
+* [Reducing Transformer Depth on Demand with Structured Dropout (Fan et al., 2019)](examples/layerdrop/README.md)
+* [Jointly Learning to Align and Translate with Transformer Models (Garg et al., 2019)](examples/joint_alignment_translation/README.md)
+* [Levenshtein Transformer (Gu et al., 2019)](examples/nonautoregressive_translation/README.md)
+* [Facebook FAIR's WMT19 News Translation Task Submission (Ng et al., 2019)](examples/wmt19/README.md)
+* [RoBERTa: A Robustly Optimized BERT Pretraining Approach (Liu et al., 2019)](examples/roberta/README.md)
+* [wav2vec: Unsupervised Pre-training for Speech Recognition (Schneider et al., 2019)](examples/wav2vec/README.md)
+* [Mixture Models for Diverse Machine Translation: Tricks of the Trade (Shen et al., 2019)](examples/translation_moe/README.md)
+* [Pay Less Attention with Lightweight and Dynamic Convolutions (Wu et al., 2019)](examples/pay_less_attention_paper/README.md)
+* [Understanding Back-Translation at Scale (Edunov et al., 2018)](examples/backtranslation/README.md)
+* [Classical Structured Prediction Losses for Sequence to Sequence Learning (Edunov et al., 2018)](https://github.com/pytorch/fairseq/tree/classic_seqlevel)
+* [Hierarchical Neural Story Generation (Fan et al., 2018)](examples/stories/README.md)
+* [Scaling Neural Machine Translation (Ott et al., 2018)](examples/scaling_nmt/README.md)
+* [Convolutional Sequence to Sequence Learning (Gehring et al., 2017)](examples/conv_seq2seq/README.md)
+* [Language Modeling with Gated Convolutional Networks (Dauphin et al., 2017)](examples/language_model/README.conv.md)
 
-id2label = json.load(open("assets/vggsound_id2label.json"))
+# Join the fairseq community
 
-device = "cuda" if torch.cuda.is_available() else "cpu"
-model = from_pretrained(
-  "ONE-PEACE_VGGSound",
-    model_type="one_peace_classify",
-    device=device,
-    dtype="float32"
-)
+* Twitter: https://twitter.com/fairseq
+* Facebook page: https://www.facebook.com/groups/fairseq.users
+* Google group: https://groups.google.com/forum/#!forum/fairseq-users
 
-# process audio
-audio_list = ["assets/cow.flac", "assets/dog.flac"]
-src_audios, audio_padding_masks = model.process_audio(audio_list)
+# License
 
-with torch.no_grad():
-    # extract audio features
-    audio_logits = model.extract_audio_features(src_audios, audio_padding_masks)
-    print(audio_logits.size())
-    predict_label_ids = audio_logits.argmax(1).cpu().tolist()
-
-for audio, predict_label_id in zip(audio_list, predict_label_ids):
-    predict_label = id2label[str(predict_label_id)]
-    print('audio: {}, predict label: {}'.format(audio, predict_label))
-
-```
-
-
-## Training & Inference
-If you are not satisfied with only using the API, we offer comprehensive training and inference instructions for [audio & multimodal](one_peace/README.md) and [vision](one_peace_vision/README.md) tasks.
-
-<br></br>
-
-# Gallery
-
-## Visual Grounding (unseen domain)
-![grounding](assets/grounding.png)
-
-## Emergent Zero-shot Retrieval
-![a2i](assets/audio2img.png)
-
-![a+t2i](assets/audio+text2img.png)
-
-![a+i2i](assets/audio+img2img.png)
-<br></br>
-
-# Acknowledgement
-* [Fairseq](https://github.com/pytorch/fairseq) A sequence modeling toolkit with flexible configuration and highly extensible code structure.
-* [xFormers](https://github.com/facebookresearch/xformers) A toolbox to accelerate research on Transformers.
-* [FlashAttention](https://github.com/HazyResearch/flash-attention) A repository that provides the official implementation of FlashAttention, which greatly speeds up multi-head attention.
-* [Apex](https://github.com/NVIDIA/apex) A repository that provides useful model acceleration and memory optimization techniques.
-<br></br>
-
-## Getting Involved
-Feel free to submit GitHub issues or pull requests. Welcome to contribute to our project!
-
-To contact us, never hestitate to send an email to `zheluo.wp@alibaba-inc.com` or `saimeng.wsj@alibaba-inc.com`!
-<br></br>
+fairseq(-py) is MIT-licensed.
+The license applies to the pre-trained models as well.
 
 # Citation
 
-If you find our paper and code useful in your research, please consider giving a star :star: and citation :pencil: :)
+Please cite as:
 
-```BibTeX
-@article{wang2023one,
-  title={ONE-PEACE: Exploring One General Representation Model Toward Unlimited Modalities},
-  author={Wang, Peng and Wang, Shijie and Lin, Junyang and Bai, Shuai and Zhou, Xiaohuan and Zhou, Jingren and Wang, Xinggang and Zhou, Chang},
-  journal={arXiv preprint arXiv:2305.11172},
-  year={2023}
+``` bibtex
+@inproceedings{ott2019fairseq,
+  title = {fairseq: A Fast, Extensible Toolkit for Sequence Modeling},
+  author = {Myle Ott and Sergey Edunov and Alexei Baevski and Angela Fan and Sam Gross and Nathan Ng and David Grangier and Michael Auli},
+  booktitle = {Proceedings of NAACL-HLT 2019: Demonstrations},
+  year = {2019},
 }
 ```
